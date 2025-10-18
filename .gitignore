@@ -63,15 +63,15 @@ writable/uploads/*
 writable/debugbar/*
 !writable/debugbar/index.html
 
-writable/**/*.db
-writable/**/*.sqlite
-
 php_errors.log
 
 #-------------------------
 # User Guide Temp Files
 #-------------------------
 user_guide_src/build/*
+user_guide_src/cilexer/build/*
+user_guide_src/cilexer/dist/*
+user_guide_src/cilexer/pycilexer.egg-info/*
 
 #-------------------------
 # Test Files
@@ -85,7 +85,6 @@ phpunit
 # Composer
 #-------------------------
 vendor/
-composer.lock
 
 #-------------------------
 # IDE / Development Files
@@ -101,15 +100,15 @@ _modules/*
 .idea/
 *.iml
 
-# Netbeans
-nbproject/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-.nb-gradle/
+# NetBeans
+/nbproject/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/nbactions.xml
+/nb-configuration.xml
+/.nb-gradle/
 
 # Sublime Text
 *.tmlanguage.cache
@@ -125,5 +124,3 @@ nb-configuration.xml
 
 /results/
 /phpunit*.xml
-
-/.php-cs-fixer.php
