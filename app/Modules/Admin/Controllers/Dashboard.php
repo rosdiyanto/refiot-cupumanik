@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Controllers;
+namespace App\Modules\Admin\Controllers;
 
 use App\Controllers\BaseController;
 
@@ -10,8 +10,9 @@ class Dashboard extends BaseController
     {
         $data = [
             'title' => 'Admin Dashboard',
+            'content' => 'dashboard'
         ];
 
-        return module_view('dashboard', 'Admin', $data);
+        return module_view('main_view', 'Admin', $data);
     }
 }
