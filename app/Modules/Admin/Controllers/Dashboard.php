@@ -12,7 +12,6 @@ class Dashboard extends BaseController
             'title' => 'Admin Dashboard',
         ];
 
-        // Panggil helper module_view sesuai urutan: view, module, data
         return module_view('dashboard', 'Admin', $data);
     }
 }
