@@ -10,6 +10,8 @@ database.default.DBDriver = MySQLi
 database.default.DBPrefix =
 database.default.port = 3306
 php spark key:generate
+php spark make:migration CreatePegawaiTable
+php spark migrate
 php spark migrate:rollback --all
 php spark migrate:status
 php spark db:seed PegawaiSeeder
