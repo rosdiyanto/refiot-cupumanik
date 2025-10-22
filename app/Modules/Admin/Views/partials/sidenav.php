@@ -2,13 +2,13 @@
     <div class="nav accordion" id="accordionSidenav">
         <!-- Sidenav Menu Heading (Core)-->
         <div class="sidenav-menu-heading">Core</div>
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= site_url('admin/dashboard')?>">
             <div class="nav-link-icon"><i data-feather="activity"></i></div>
             Dashboard
         </a>
         <!-- Sidenav Master Data-->
         <div class="sidenav-menu-heading">Master Data</div>
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= site_url('admin/pegawai')?>">
             <div class="nav-link-icon"><i data-feather="users"></i></div>
             Pegawai
         </a>
@@ -16,7 +16,7 @@
             <div class="nav-link-icon"><i data-feather="map"></i></div>
             Mapping Pegawai
         </a>
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= site_url('admin/user')?>">
             <div class="nav-link-icon"><i data-feather="list"></i></div>
             Daftar User
         </a>
