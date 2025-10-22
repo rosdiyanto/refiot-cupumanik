@@ -439,13 +439,32 @@ class Auth extends ShieldAuth
      * Returns the URL that a user should be redirected
      * to after a successful login.
      */
+    // public function loginRedirect(): string
+    // {
+    //     $session = session();
+    //     $url     = $session->getTempdata('beforeLoginUrl') ?? setting('Auth.redirects')['login'];
+
+    //     return $this->getUrl($url);
+    // }
+
     public function loginRedirect(): string
     {
-        $session = session();
-        $url     = $session->getTempdata('beforeLoginUrl') ?? setting('Auth.redirects')['login'];
+        $user = auth()->user();
 
-        return $this->getUrl($url);
+        if ($user) {
+            if ($user->inGroup('admin')) {
+                return site_url('admin/dashboard');
+            }
+
+            if ($user->inGroup('user')) {
+                return site_url('berhasil-login');
+            }
+        }
+
+        // fallback default
+        return $this->getUrl($this->redirects['login']);
     }
+
 
     /**
      * Returns the URL that a user should be redirected
