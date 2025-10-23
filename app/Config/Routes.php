@@ -5,7 +5,13 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+
+$routes->get('/', function () {
+    return redirect()->to('login');
+});
+
+
+$routes->get('home', 'Home::index');
 
 // bawaan shield
 service('auth')->routes($routes);
@@ -13,9 +19,11 @@ service('auth')->routes($routes);
 $routes->get('/berhasil-login', 'Berhasil::infoLogin');
 $routes->get('/berhasil-register', 'Berhasil::infoRegister');
 
-$routes->group('admin', ['namespace' => 'App\Modules\Admin\Controllers', 'filter' => 'group:admin'], function ($routes) {
+$routes->group('admin', ['namespace' => 'App\Modules\Admin\Controllers'], function ($routes) {
+// $routes->group('admin', ['namespace' => 'App\Modules\Admin\Controllers', 'filter' => 'group:admin'], function ($routes) {
     $routes->get('dashboard', 'DashboardController::index');
     $routes->get('user', 'UserController::index');
+    $routes->get('user/getdata', 'UserController::getData');
 });
 
 $routes->group('datatables', ['namespace' => 'App\Controllers'], function ($routes) {
@@ -30,4 +38,3 @@ $routes->group('datatables', ['namespace' => 'App\Controllers'], function ($rout
 });
 
 $routes->get('/testemail', 'TestEmail::index');
-
