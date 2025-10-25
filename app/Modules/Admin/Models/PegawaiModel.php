@@ -9,19 +9,29 @@ class PegawaiModel extends Model
 {
     protected $table            = 'pegawai';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = false; // UUID bukan auto increment
+    protected $useAutoIncrement = false; // UUID, bukan auto increment
     protected $returnType       = 'array';
     protected $protectFields    = true;
     
     protected $allowedFields    = [
         'id',
-        'nama',
-        'nip',
-        'id_group',
-        'jabatan',
-        'golongan',
+        'nip_baru',
+        'nik',
+        'nama_pegawai',
+        'tempat_lahir',
         'tanggal_lahir',
-        'alamat',
+        'status_kepegawaian',
+        'jab_type',
+        'nama_golongan',
+        'nama_pangkat',
+        'kode_unor',
+        'kode_uk',
+        'nama_unor',
+        'unit_kerja',
+        'jabatan',
+        'nama_ese',
+        'kelas_jabatan',
+        'jenjang_pendidikan',
         'created_at',
         'updated_at'
     ];
@@ -32,7 +42,7 @@ class PegawaiModel extends Model
     protected $updatedField  = 'updated_at';
     protected $dateFormat    = 'datetime';
 
-    // Callback
+    // Callback sebelum insert
     protected $beforeInsert = ['generateUUID'];
 
     /**
@@ -44,5 +54,27 @@ class PegawaiModel extends Model
             $data['data']['id'] = Uuid::uuid4()->toString(); // UUID v4
         }
         return $data;
+    }
+
+    /**
+     * Upsert data berdasarkan nip_baru
+     *
+     * @param array $data
+     * @return bool|int
+     */
+    public function upsert(array $data)
+    {
+        if (empty($data['nip_baru'])) {
+            throw new \InvalidArgumentException("NIP baru harus diisi untuk upsert.");
+        }
+
+        $existing = $this->where('nip_baru', $data['nip_baru'])->first();
+
+        if ($existing) {
+            $data['id'] = $existing['id']; // gunakan ID yang sudah ada
+            return $this->update($existing['id'], $data);
+        } else {
+            return $this->insert($data); // insert baru, UUID otomatis
+        }
     }
 }
