@@ -4,46 +4,51 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\DatatablesModel;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class DatatablesController extends BaseController
 {
-    protected $datatables_model;
+    protected DatatablesModel $datatablesModel;
 
     public function __construct()
     {
-        // Inisialisasi model sekali saja
-        $this->datatables_model = new DatatablesModel();
+        // Inisialisasi model
+        $this->datatablesModel = new DatatablesModel();
     }
 
-    function ceking()
-    {
-        $model = new \App\Models\DatatablesModel();
-        print_r(get_class_methods($model));
-    }
-    
-    public function index()
+    public function index(): string
     {
         return view('datatables/index');
     }
 
-    public function getData()
+    public function getData(): ResponseInterface
     {
-        $builder = $this->datatables_model->builder();
+        // Gunakan builder tapi pilih kolom spesifik agar tidak kena SELECT *
+        $builder = $this->datatablesModel->builder()
+            ->select(['id', 'nama', 'email', 'alamat']);
 
+        // Kolom custom (misalnya kolom action di DataTables)
         $customColumns = [
             'action' => function ($row) {
                 return '
                     <a href="' . site_url('datatables/edit/' . $row->id) . '" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="' . site_url('datatables/delete/' . $row->id) . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Yakin mau hapus data ini?\')">Hapus</a>
+                    <a href="' . site_url('datatables/delete/' . $row->id) . '" class="btn btn-sm btn-danger" 
+                    onclick="return confirm(\'Yakin mau hapus data ini?\')">Hapus</a>
                 ';
             },
         ];
 
-        $output = datatable_response($builder, $this->request, $customColumns);
+        /**
+         * 🔧 Gunakan helper versi array agar query tidak diubah oleh helper.
+         * Ini mencegah helper melakukan SELECT * ulang.
+         */
+        $data = $builder->get()->getResultArray();
+        $output = datatable_response_array($data, $this->request, $customColumns);
+
         return $this->response->setJSON($output);
     }
 
-    public function create()
+    public function create(): string
     {
         return view('datatables/form', [
             'title'  => 'Tambah Data',
@@ -52,7 +57,7 @@ class DatatablesController extends BaseController
         ]);
     }
 
-    public function store()
+    public function store(): ResponseInterface
     {
         $data = [
             'nama'   => $this->request->getPost('nama'),
@@ -60,14 +65,18 @@ class DatatablesController extends BaseController
             'alamat' => $this->request->getPost('alamat'),
         ];
 
-        $this->datatables_model->insert($data);
+        // Validasi sederhana
+        if (empty($data['nama']) || empty($data['email'])) {
+            return redirect()->back()->with('error', 'Nama dan Email wajib diisi.');
+        }
 
+        $this->datatablesModel->insert($data);
         return redirect()->to('datatables')->with('success', 'Data berhasil ditambahkan.');
     }
 
-    public function edit($id)
+    public function edit($id): string
     {
-        $data = $this->datatables_model->find($id);
+        $data = $this->datatablesModel->find($id);
 
         if (!$data) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Data dengan ID $id tidak ditemukan");
@@ -80,7 +89,7 @@ class DatatablesController extends BaseController
         ]);
     }
 
-    public function update($id)
+    public function update($id): ResponseInterface
     {
         $data = [
             'nama'   => $this->request->getPost('nama'),
@@ -88,15 +97,32 @@ class DatatablesController extends BaseController
             'alamat' => $this->request->getPost('alamat'),
         ];
 
-        $this->datatables_model->update($id, $data);
+        if (empty($data['nama']) || empty($data['email'])) {
+            return redirect()->back()->with('error', 'Nama dan Email wajib diisi.');
+        }
 
+        $this->datatablesModel->update($id, $data);
         return redirect()->to('datatables')->with('success', 'Data berhasil diperbarui.');
     }
 
-    public function delete($id)
+    public function delete($id): ResponseInterface
     {
-        $this->datatables_model->delete($id);
+        if (!$this->datatablesModel->find($id)) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
 
+        $this->datatablesModel->delete($id);
         return redirect()->to('datatables')->with('success', 'Data berhasil dihapus.');
+    }
+
+    /**
+     * Debugging (opsional)
+     */
+    public function ceking(): void
+    {
+        $model = new DatatablesModel();
+        echo '<pre>';
+        print_r(get_class_methods($model));
+        echo '</pre>';
     }
 }
