@@ -1,84 +1,62 @@
 <?php
 
-use CodeIgniter\Database\BaseBuilder;
-use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\IncomingRequest;
 
-/**
- * Helper server-side DataTables.
- * Support: search, order, paging, custom column (callback).
- */
-
-if (!function_exists('datatable_response')) {
+if (!function_exists('datatable_response_array')) {
     /**
-     * @param BaseBuilder $builder Query builder CI4
-     * @param RequestInterface $request Objek request (biasanya $this->request)
-     * @param array|null $customColumns Array kolom custom ['nama_kolom' => function($row){...}]
-     * @return array Response JSON DataTables
+     * Datatable helper untuk data array.
+     * Support: search, order, pagination, custom column.
      */
-    function datatable_response(BaseBuilder $builder, RequestInterface $request, ?array $customColumns = [])
+    function datatable_response_array(array $data, IncomingRequest $request, ?array $customColumns = [])
     {
-        $draw   = (int) $request->getGetPost('draw');
-        $start  = (int) $request->getGetPost('start');
-        $length = (int) $request->getGetPost('length');
+        // Ambil parameter DataTables
+        $draw   = (int) ($request->getGetPost('draw') ?? 1);
+        $start  = (int) ($request->getGetPost('start') ?? 0);
+        $length = (int) ($request->getGetPost('length') ?? -1);
         $search = $request->getGetPost('search')['value'] ?? '';
+        $order  = $request->getGetPost('order') ?? [];
+        $columns = $request->getGetPost('columns') ?? [];
 
-        // Ambil nama tabel dan kolom
-        $table  = $builder->getTable();
-        $fields = $builder->get()->getFieldNames();
+        $recordsTotal = count($data);
 
-        // Hitung total data
-        $recordsTotal = $builder->countAllResults(false);
-
-        // Reset builder untuk query berikutnya
-        $builder->resetQuery();
-        $builder = $builder->db()->table($table);
-
-        // Filtering (search)
-        if (!empty($search)) {
-            $builder->groupStart();
-            foreach ($fields as $field) {
-                $builder->orLike($field, $search);
-            }
-            $builder->groupEnd();
+        // 🔍 Filtering (search global)
+        if ($search !== '') {
+            $data = array_filter($data, function ($row) use ($search) {
+                foreach ($row as $value) {
+                    if (stripos((string) $value, $search) !== false) {
+                        return true;
+                    }
+                }
+                return false;
+            });
         }
 
-        // Hitung total setelah filter
-        $recordsFiltered = $builder->countAllResults(false);
-        $builder->resetQuery();
-        $builder = $builder->db()->table($table);
+        $recordsFiltered = count($data);
 
-        // Apply search lagi ke data utama
-        if (!empty($search)) {
-            $builder->groupStart();
-            foreach ($fields as $field) {
-                $builder->orLike($field, $search);
-            }
-            $builder->groupEnd();
-        }
-
-        // Sorting
-        $order   = $request->getGetPost('order');
-        $columns = $request->getGetPost('columns');
+        // 🔽 Sorting
         if (!empty($order) && !empty($columns)) {
             foreach ($order as $ord) {
                 $colIndex = $ord['column'];
-                $colName  = $columns[$colIndex]['data'];
-                $dir      = $ord['dir'] ?? 'asc';
-                if (in_array($colName, $fields)) {
-                    $builder->orderBy($colName, $dir);
+                $colName  = $columns[$colIndex]['data'] ?? null;
+                $dir      = strtolower($ord['dir'] ?? 'asc');
+
+                if ($colName && isset($data[0][$colName])) {
+                    usort($data, function ($a, $b) use ($colName, $dir) {
+                        if ($a[$colName] == $b[$colName]) return 0;
+                        return ($dir === 'asc')
+                            ? ($a[$colName] <=> $b[$colName])
+                            : ($b[$colName] <=> $a[$colName]);
+                    });
                 }
             }
         }
 
-        // Paging
-        if ($length != -1) {
-            $builder->limit($length, $start);
+        // 📄 Pagination
+        if ($length > 0) {
+            $data = array_slice($data, $start, $length);
         }
 
-        // Ambil data
-        $data = $builder->get()->getResultArray();
-
-        // Tambahkan kolom custom (misalnya tombol Aksi)
+        // ⚙️ Custom Columns
         if (!empty($customColumns)) {
             foreach ($data as &$row) {
                 foreach ($customColumns as $key => $callback) {
@@ -91,7 +69,7 @@ if (!function_exists('datatable_response')) {
             'draw' => $draw,
             'recordsTotal' => $recordsTotal,
             'recordsFiltered' => $recordsFiltered,
-            'data' => $data,
+            'data' => array_values($data),
         ];
     }
 }
