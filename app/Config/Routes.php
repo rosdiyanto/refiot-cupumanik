@@ -24,6 +24,10 @@ $routes->group('admin', ['namespace' => 'App\Modules\Admin\Controllers'], functi
     $routes->get('dashboard', 'DashboardController::index');
     $routes->get('user', 'UserController::index');
     $routes->get('user/getdata', 'UserController::getData');
+    $routes->get('pegawai', 'PegawaiController::index');
+    $routes->get('pegawai/getdata', 'PegawaiController::getData');
+    $routes->get('rfid', 'RfidController::index');
+    $routes->get('rfid/getdata', 'RfidController::getData');
 });
 
 $routes->group('datatables', ['namespace' => 'App\Controllers'], function ($routes) {
