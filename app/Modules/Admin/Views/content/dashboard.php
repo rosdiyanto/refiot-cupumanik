@@ -8,7 +8,7 @@
                             <div class="page-header-icon"><i data-feather="activity"></i></div>
                             Dashboard
                         </h1>
-                        <div class="page-header-subtitle">Example dashboard overview and content summary</div>
+                        <div class="page-header-subtitle">Monitoring Pengguna layanan REFIOT</div>
                     </div>
                 </div>
             </div>
@@ -17,50 +17,143 @@
     <!-- Main page content-->
     <div class="container-xl px-4 mt-n10">
         <div class="row">
-            <div class="col-xl-4 mb-4">
-                <!-- Dashboard example card 1-->
-                <a class="card lift h-100" href="#!">
-                    <div class="card-body d-flex justify-content-center flex-column">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="me-3">
-                                <i class="feather-xl text-primary mb-3" data-feather="package"></i>
-                                <h5>Powerful Components</h5>
-                                <div class="text-muted small">To create informative visual elements on your pages</div>
+            <div class="col-xxl-8 col-xl-12 mb-4">
+                <div class="card h-100">
+                    <div class="card-body h-100 p-5">
+                        <div class="row align-items-center">
+                            <div class="col-xl-8 col-xxl-12">
+                                <div class="text-center text-xl-start text-xxl-center mb-4 mb-xl-0 mb-xxl-4">
+                                    <h1 class="text-primary">Selamat Datang di REFIOT!</h1>
+                                    <p class="text-gray-700 mb-0">Sistem pintar untuk monitoring layanan pegawai yang terintegrasi dengan kartu pintar digital (Digital Smart Card).
+                                        REFIOT membantu Anda memantau, mengelola, dan meningkatkan efisiensi layanan pegawai secara real-time melalui dashboard yang interaktif dan informatif.</p>
+                                </div>
                             </div>
-                            <img src="<?= base_url() ?>assets/img/illustrations/browser-stats.svg" alt="..." style="width: 8rem" />
+                            <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="<?= base_url() ?>assets/img/illustrations/at-work.svg" style="max-width: 26rem" /></div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
-            <div class="col-xl-4 mb-4">
-                <!-- Dashboard example card 2-->
-                <a class="card lift h-100" href="#!">
-                    <div class="card-body d-flex justify-content-center flex-column">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="me-3">
-                                <i class="feather-xl text-secondary mb-3" data-feather="book"></i>
-                                <h5>Documentation</h5>
-                                <div class="text-muted small">To keep you on track when working with our toolkit</div>
-                            </div>
-                            <img src="<?= base_url() ?>assets/img/illustrations/processing.svg" alt="..." style="width: 8rem" />
+
+            <div class="col-xxl-4 col-xl-6 mb-4">
+                <div class="card card-header-actions h-100">
+                    <div class="card-header">
+                        Monitoring Layanan
+                    </div>
+                    <div class="card-body">
+                        <h4 class="small">
+                            Layanan Peremajaan Data
+                            <span class="float-end fw-bold">102</span>
+                        </h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h4 class="small">
+                            Layanan Pensiun
+                            <span class="float-end fw-bold">130</span>
+                        </h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h4 class="small">
+                            Layanan Tapera
+                            <span class="float-end fw-bold">140</span>
+                        </h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h4 class="small">
+                            Layanan Kepangkatan
+                            <span class="float-end fw-bold">154</span>
+                        </h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h4 class="small">
+                            Layanan Formasi
+                            <span class="float-end fw-bold">120</span>
+                        </h4>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
-                </a>
+                    <div class="card-footer position-relative">
+                        <div class="d-flex align-items-center justify-content-between small text-body">
+                            <a class="stretched-link text-body" href="#!">Visit Task Center</a>
+                            <i class="fas fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-xl-4 mb-4">
-                <!-- Dashboard example card 3-->
-                <a class="card lift h-100" href="#!">
-                    <div class="card-body d-flex justify-content-center flex-column">
-                        <div class="d-flex align-items-center justify-content-between">
+        </div>
+        <!-- Example Colored Cards for Dashboard Demo-->
+        <div class="row">
+            <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-primary text-white h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
                             <div class="me-3">
-                                <i class="feather-xl text-green mb-3" data-feather="layout"></i>
-                                <h5>Pages &amp; Layouts</h5>
-                                <div class="text-muted small">To help get you started when building your new UI</div>
+                                <div class="text-white-75 small">Pegawai</div>
+                                <div class="text-lg fw-bold">12.206</div>
                             </div>
-                            <img src="<?= base_url() ?>assets/img/illustrations/windows.svg" alt="..." style="width: 8rem" />
+                            <i class="feather-xl text-white-50" data-feather="users"></i>
                         </div>
                     </div>
-                </a>
+                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                        <a class="text-white stretched-link" href="#!">View Report</a>
+                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-warning text-white h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="me-3">
+                                <div class="text-white-75 small">Pengguna RFID</div>
+                                <div class="text-lg fw-bold">4000</div>
+                            </div>
+                            <i class="feather-xl text-white-50" data-feather="credit-card"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                        <a class="text-white stretched-link" href="#!">View Report</a>
+                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-success text-white h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="me-3">
+                                <div class="text-white-75 small">Reader RFID</div>
+                                <div class="text-lg fw-bold">24</div>
+                            </div>
+                            <i class="feather-xl text-white-50" data-feather="wifi"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                        <a class="text-white stretched-link" href="#!">View Tasks</a>
+                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-danger text-white h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="me-3">
+                                <div class="text-white-75 small">Lokasi Penyebaran</div>
+                                <div class="text-lg fw-bold">17</div>
+                            </div>
+                            <i class="feather-xl text-white-50" data-feather="map-pin"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                        <a class="text-white stretched-link" href="#!">View Requests</a>
+                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
