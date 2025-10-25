@@ -2,21 +2,21 @@
     <div class="nav accordion" id="accordionSidenav">
         <!-- Sidenav Menu Heading (Core)-->
         <div class="sidenav-menu-heading">Core</div>
-        <a class="nav-link" href="<?= site_url('admin/dashboard')?>">
+        <a class="nav-link" href="<?= site_url('admin/dashboard') ?>">
             <div class="nav-link-icon"><i data-feather="activity"></i></div>
             Dashboard
         </a>
         <!-- Sidenav Master Data-->
         <div class="sidenav-menu-heading">Master Data</div>
-        <a class="nav-link" href="<?= site_url('admin/pegawai')?>">
+        <a class="nav-link" href="<?= site_url('admin/pegawai') ?>">
             <div class="nav-link-icon"><i data-feather="users"></i></div>
             Pegawai
         </a>
-        <a class="nav-link" href="charts.html">
-            <div class="nav-link-icon"><i data-feather="map"></i></div>
-            Mapping Pegawai
+        <a class="nav-link" href="<?= site_url('admin/rfid') ?>">
+            <div class="nav-link-icon"><i data-feather="credit-card"></i></div>
+            RFID
         </a>
-        <a class="nav-link" href="<?= site_url('admin/user')?>">
+        <a class="nav-link" href="<?= site_url('admin/user') ?>">
             <div class="nav-link-icon"><i data-feather="list"></i></div>
             Daftar User
         </a>
@@ -26,6 +26,10 @@
         </a>
         <!-- Sidenav Services-->
         <div class="sidenav-menu-heading">Services</div>
+        <a class="nav-link" href="charts.html">
+            <div class="nav-link-icon"><i data-feather="map"></i></div>
+            Mapping Pegawai
+        </a>
         <a class="nav-link" href="charts.html">
             <div class="nav-link-icon"><i data-feather="credit-card"></i></div>
             Riwayat RFID
