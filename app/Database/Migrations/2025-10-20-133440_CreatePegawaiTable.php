@@ -11,38 +11,92 @@ class CreatePegawaiTable extends Migration
         $this->forge->addField([
             'id' => [
                 'type'       => 'CHAR',
-                'constraint' => 36, // UUID string
+                'constraint' => 36, // UUID v4
                 'null'       => false,
             ],
-            'nama' => [
+            'nip_baru' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 50,
+                'null'       => false,
             ],
-            'nip' => [
+            'nik' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '20',
-                'unique'     => true,
-            ],
-            'id_group' => [
-                'type'       => 'CHAR',
-                'constraint' => 36, // UUID string
+                'constraint' => 30,
                 'null'       => true,
             ],
-            'jabatan' => [
+            'nama_pegawai' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '50',
+                'constraint' => 255,
+                'null'       => false,
             ],
-            'golongan' => [
+            'tempat_lahir' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '10',
+                'constraint' => 100,
+                'null'       => true,
             ],
             'tanggal_lahir' => [
                 'type' => 'DATE',
                 'null' => true,
             ],
-            'alamat' => [
-                'type' => 'TEXT',
-                'null' => true,
+            'status_kepegawaian' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 50,
+                'null'       => true,
+            ],
+            'jab_type' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 10,
+                'null'       => true,
+            ],
+            'nama_golongan' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 50,
+                'null'       => true,
+            ],
+            'nama_pangkat' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 50,
+                'null'       => true,
+            ],
+            'kode_unor' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 20,
+                'null'       => true,
+            ],
+            'code_uk' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 5,
+                'null'       => true,
+            ],
+            'nama_unor' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
+            ],
+            'unit_kerja' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
+            ],
+            'jabatan' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
+            ],
+            'nama_ese' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 50,
+                'null'       => true,
+            ],
+            'kelas_jabatan' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 50,
+                'null'       => true,
+            ],
+            'jenjang_pendidikan' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 50,
+                'null'       => true,
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -54,8 +108,8 @@ class CreatePegawaiTable extends Migration
             ],
         ]);
 
-        $this->forge->addKey('id', true); // primary key → otomatis unik
-        $this->forge->addKey('id_group'); // index tambahan jika sering query berdasarkan group
+        $this->forge->addKey('id', true); // primary key
+        $this->forge->addUniqueKey('nip_baru'); // unik untuk upsert
         $this->forge->createTable('pegawai');
     }
 
