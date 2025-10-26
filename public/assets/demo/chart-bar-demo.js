@@ -1,6 +1,6 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 (Chart.defaults.global.defaultFontFamily = "Metropolis"),
-'-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = "#858796";
 
 function number_format(number, decimals, dec_point, thousands_sep) {
@@ -12,7 +12,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
         sep = typeof thousands_sep === "undefined" ? "," : thousands_sep,
         dec = typeof dec_point === "undefined" ? "." : dec_point,
         s = "",
-        toFixedFix = function(n, prec) {
+        toFixedFix = function (n, prec) {
             var k = Math.pow(10, prec);
             return "" + Math.round(n * k) / k;
         };
@@ -29,85 +29,69 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Bar Chart Example
-var ctx = document.getElementById("myBarChart");
-var myBarChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June"],
-        datasets: [{
-            label: "Revenue",
-            backgroundColor: "rgba(0, 97, 242, 1)",
-            hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
-            borderColor: "#4e73df",
-            data: [4215, 5312, 6251, 7841, 9821, 14984],
-            maxBarThickness: 25
-        }]
-    },
-    options: {
-        maintainAspectRatio: false,
-        layout: {
-            padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-            }
-        },
-        scales: {
-            xAxes: [{
-                time: {
-                    unit: "month"
-                },
-                gridLines: {
-                    display: false,
-                    drawBorder: false
-                },
-                ticks: {
-                    maxTicksLimit: 6
-                }
-            }],
-            yAxes: [{
-                ticks: {
-                    min: 0,
-                    max: 15000,
-                    maxTicksLimit: 5,
-                    padding: 10,
-                    // Include a dollar sign in the ticks
-                    callback: function(value, index, values) {
-                        return "$" + number_format(value);
-                    }
-                },
-                gridLines: {
-                    color: "rgb(234, 236, 244)",
-                    zeroLineColor: "rgb(234, 236, 244)",
-                    drawBorder: false,
-                    borderDash: [2],
-                    zeroLineBorderDash: [2]
-                }
+document.addEventListener("DOMContentLoaded", function () {
+    var ctx = document.getElementById("myBarChart");
+
+    // Kalau canvas tidak ada, langsung keluar diam-diam (tanpa pesan)
+    if (!ctx) return;
+
+    // ... sisanya tetap sama ...
+    var myBarChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June"],
+            datasets: [{
+                label: "Revenue",
+                backgroundColor: "rgba(0, 97, 242, 1)",
+                hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
+                borderColor: "#4e73df",
+                data: [4215, 5312, 6251, 7841, 9821, 14984],
+                maxBarThickness: 25
             }]
         },
-        legend: {
-            display: false
-        },
-        tooltips: {
-            titleMarginBottom: 10,
-            titleFontColor: "#6e707e",
-            titleFontSize: 14,
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            borderColor: "#dddfeb",
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            caretPadding: 10,
-            callbacks: {
-                label: function(tooltipItem, chart) {
-                    var datasetLabel =
-                        chart.datasets[tooltipItem.datasetIndex].label || "";
-                    return datasetLabel + ": $" + number_format(tooltipItem.yLabel);
+        options: {
+            maintainAspectRatio: false,
+            layout: { padding: { left: 10, right: 25, top: 25, bottom: 0 } },
+            scales: {
+                x: {
+                    grid: { display: false, drawBorder: false },
+                    ticks: { maxTicksLimit: 6 }
+                },
+                y: {
+                    min: 0,
+                    max: 15000,
+                    ticks: {
+                        stepSize: 3000,
+                        callback: function (value) {
+                            return "$" + value.toLocaleString();
+                        }
+                    },
+                    grid: {
+                        color: "rgb(234, 236, 244)",
+                        borderDash: [2],
+                        zeroLineBorderDash: [2]
+                    }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: "rgb(255,255,255)",
+                    titleColor: "#6e707e",
+                    bodyColor: "#858796",
+                    borderColor: "#dddfeb",
+                    borderWidth: 1,
+                    padding: 15,
+                    displayColors: false,
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.dataset.label || '';
+                            return label + ': $' + context.parsed.y.toLocaleString();
+                        }
+                    }
                 }
             }
         }
-    }
+    });
 });
+
