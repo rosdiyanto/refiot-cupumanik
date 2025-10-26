@@ -8,7 +8,7 @@
                             <div class="page-header-icon"><i data-feather="users"></i></div>
                             Pegawai
                         </h1>
-                        <div class="page-header-subtitle">Daftar pegawai yang sudah integrasi dengan REFIOT</div>
+                        <div class="page-header-subtitle">Daftar pegawai yang ada di REFIOT</div>
                     </div>
                 </div>
             </div>
