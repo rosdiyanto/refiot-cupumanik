@@ -5793,6 +5793,13 @@ textarea.form-control-lg {
   text-decoration: none;
 }
 
+.navbar-brand img {
+  height: 35px !important;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .navbar-nav {
   display: flex;
   flex-direction: column;
