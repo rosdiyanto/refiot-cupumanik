@@ -1,0 +1,21 @@
+/* jarak antara search box dan tabel */
+div.dataTables_filter {
+    margin-bottom: 20px !important;
+}
+
+/* aktifkan scroll horizontal */
+div.table-responsive {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* pastikan tabel tidak pecah saat scroll */
+table.dataTable {
+    width: 100% !important;
+}
+
+/* opsional: agar header tetap rapi */
+table.dataTable thead.table-custom {
+    background-color: #035ded;
+    color: #fff;
+}

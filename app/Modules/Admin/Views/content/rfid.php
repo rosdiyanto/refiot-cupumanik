@@ -16,19 +16,23 @@
     </header>
     <!-- Main page content-->
     <div class="container-xl px-4 mt-n10">
-        <div class="card">
+        <div class="card shadow-sm">
             <div class="card-body">
-                <table id="tblDatatables" class="display">
-                    <thead>
-                        <tr>
-                            <th>Kode RFID</th>
-                            <th>Status</th>
-                            <th>Nama Pegawai</th>
-                            <th>Tanggal Daftar</th>
-                            <th>Keterangan</th>
-                        </tr>
-                    </thead>
-                </table>
+                <div class="table-responsive">
+                    <table
+                        id="tblDatatables"
+                        class="display nowrap table table-striped table-bordered">
+                        <thead class="table-custom">
+                            <tr>
+                                <th>Kode RFID</th>
+                                <th>Status</th>
+                                <th>Nama Pegawai</th>
+                                <th>Tanggal Daftar</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
