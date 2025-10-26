@@ -3,7 +3,7 @@
     <!-- <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">REFIOT Admin</a> -->
 
     <a class="navbar-brand pe-3 ps-4 ps-lg-2 d-flex align-items-center" href="<?= site_url()?>">
-        <img src="<?= base_url('assets/img/logo-refiot.png') ?>" alt="REFIOT">
+        <img src="<?= base_url('assets/img/logo-refiot.svg') ?>" alt="REFIOT">
     </a>
 
     <!-- Navbar Items-->
