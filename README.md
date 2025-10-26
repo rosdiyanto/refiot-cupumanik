@@ -23,3 +23,4 @@ php spark ctl:user UserController
 php spark ctl:admin AdminController
 composer dump-autoload
 composer dump-autoload -o -v
+php spark filters:list -> cek daftar filter
