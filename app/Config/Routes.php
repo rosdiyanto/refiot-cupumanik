@@ -42,3 +42,8 @@ $routes->group('datatables', ['namespace' => 'App\Controllers'], function ($rout
 });
 
 $routes->get('/testemail', 'TestEmail::index');
+
+$routes->group('auth', ['namespace' => 'App\Controllers\Auth'], function ($routes) {
+    $routes->get('login', 'LoginController::loginView');
+    $routes->get('register', 'LoginController::registerView');
+});
