@@ -12,7 +12,7 @@ Dengan menggabungkan RFID dan IoT, REFIOT menciptakan ekosistem digital yang **e
 1. Clone repository ini:
    ```bash
    git clone https://github.com/rosdiyanto/refiot-cupumanik.git
-   cd nama-project
+   cd refiot-cupumanik
    ```
 
 2. Install dependensi menggunakan Composer:
